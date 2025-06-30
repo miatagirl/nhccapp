@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, Circle, Star, Globe, ExternalLink } from 'lucide-react';
 import { ApplicationStep } from '../types';
 import { HousingForm } from './HousingForm';
+import { I20Form } from './I20Form';
 
 interface StepCardProps {
   step: ApplicationStep;
@@ -33,6 +34,12 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
   const handleHousingSubmit = (housingData: any) => {
     // Store housing data (in a real app, this would go to a backend)
     console.log('Housing preferences submitted:', housingData);
+    onToggle(step.id);
+  };
+
+  const handleI20Submit = (i20Data: any) => {
+    // Store I-20 data (in a real app, this would go to a backend)
+    console.log('I-20 request submitted:', i20Data);
     onToggle(step.id);
   };
 
@@ -116,6 +123,14 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
         {step.id === 'housing' && (
           <HousingForm 
             onSubmit={handleHousingSubmit}
+            isCompleted={step.completed}
+          />
+        )}
+
+        {/* I-20 Form - Only show for I-20 step */}
+        {step.id === 'i20' && (
+          <I20Form 
+            onSubmit={handleI20Submit}
             isCompleted={step.completed}
           />
         )}
