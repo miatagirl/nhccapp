@@ -101,7 +101,7 @@ function App() {
               You've completed all required application steps for New Hope Christian College!
             </p>
             <p className="text-lg">
-              Welcome to the Eagle family! We're excited to have you join our community.
+              Welcome to the Deacon family! We're excited to have you join our community.
             </p>
           </motion.div>
         )}

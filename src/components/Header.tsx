@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ profile }) => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-4">
           <img 
-            src="/stacked logo.png" 
+            src="/NHCC Logo White.png" 
             alt="New Hope Christian College" 
             className="h-16 w-auto"
           />

@@ -4,7 +4,7 @@ import { ApplicationStep, StudentProfile } from '../types';
 export const useApplicationData = (isInternational: boolean = false) => {
   const [steps, setSteps] = useState<ApplicationStep[]>([]);
   const [profile, setProfile] = useState<StudentProfile>({
-    name: 'Future Eagle',
+    name: 'Future Deacon',
     email: '',
     isInternational,
     totalPoints: 0,
