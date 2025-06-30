@@ -25,6 +25,10 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
     window.open('https://www.newhope.edu/admissions/apply/', '_blank', 'noopener,noreferrer');
   };
 
+  const handleFafsaLink = () => {
+    window.open('https://studentaid.gov/h/apply-for-aid/fafsa', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -85,6 +89,19 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
           >
             <ExternalLink size={18} />
             <span>Start Application</span>
+          </motion.button>
+        )}
+
+        {/* FAFSA Link Button - Only show for FAFSA step */}
+        {step.id === 'fafsa' && (
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleFafsaLink}
+            className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-nhcc-maroon text-white hover:bg-nhcc-light-maroon mb-3 flex items-center justify-center space-x-2"
+          >
+            <ExternalLink size={18} />
+            <span>Complete FAFSA</span>
           </motion.button>
         )}
 
