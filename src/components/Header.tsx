@@ -17,10 +17,11 @@ export const Header: React.FC<HeaderProps> = ({ profile }) => {
             alt="New Hope Christian College" 
             className="h-16 w-auto"
           />
-          <div>
-            <h1 className="text-3xl font-bold">Application Journey</h1>
-            <p className="text-blue-100">Track your progress to New Hope!</p>
-          </div>
+        </div>
+        
+        <div className="flex-1 text-center">
+          <h1 className="text-3xl font-bold">Application Journey</h1>
+          <p className="text-blue-100">Track your progress to New Hope!</p>
         </div>
         
         <motion.div 
