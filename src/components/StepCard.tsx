@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Circle, Star, Globe } from 'lucide-react';
+import { CheckCircle, Circle, Star, Globe, ExternalLink } from 'lucide-react';
 import { ApplicationStep } from '../types';
 
 interface StepCardProps {
@@ -19,6 +19,10 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
       case 'i20': return <Globe {...iconProps} />;
       default: return <Circle {...iconProps} />;
     }
+  };
+
+  const handleApplicationLink = () => {
+    window.open('https://www.newhope.edu/admissions/apply/', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -69,6 +73,19 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
               ))}
             </ul>
           </div>
+        )}
+
+        {/* Application Link Button - Only show for application step */}
+        {step.id === 'application' && (
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleApplicationLink}
+            className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-nhcc-maroon text-white hover:bg-nhcc-light-maroon mb-3 flex items-center justify-center space-x-2"
+          >
+            <ExternalLink size={18} />
+            <span>Start Application</span>
+          </motion.button>
         )}
 
         <motion.button
