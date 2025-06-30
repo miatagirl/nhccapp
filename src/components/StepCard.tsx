@@ -4,6 +4,7 @@ import { CheckCircle, Circle, Star, Globe, ExternalLink } from 'lucide-react';
 import { ApplicationStep } from '../types';
 import { HousingForm } from './HousingForm';
 import { I20Form } from './I20Form';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface StepCardProps {
   step: ApplicationStep;
@@ -12,6 +13,8 @@ interface StepCardProps {
 }
 
 export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => {
+  const { t } = useLanguage();
+
   const getIcon = (iconName: string) => {
     const iconProps = { size: 24, className: "text-white" };
     switch (iconName) {
@@ -56,7 +59,7 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
     >
       {step.optional && (
         <div className="absolute -top-2 -right-2 bg-nhcc-maroon text-white text-xs px-2 py-1 rounded-full font-semibold">
-          Optional
+          {t('optional')}
         </div>
       )}
       
@@ -81,7 +84,7 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
 
         {step.requirements && (
           <div className="mb-4">
-            <h4 className="font-semibold text-nhcc-navy mb-2">Requirements:</h4>
+            <h4 className="font-semibold text-nhcc-navy mb-2">{t('requirements')}</h4>
             <ul className="text-sm text-gray-600 space-y-1">
               {step.requirements.map((req, idx) => (
                 <li key={idx} className="flex items-start">
@@ -102,7 +105,7 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
             className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-nhcc-maroon text-white hover:bg-nhcc-light-maroon mb-3 flex items-center justify-center space-x-2"
           >
             <ExternalLink size={18} />
-            <span>Start Application</span>
+            <span>{t('startApplication')}</span>
           </motion.button>
         )}
 
@@ -115,7 +118,7 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
             className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-nhcc-maroon text-white hover:bg-nhcc-light-maroon mb-3 flex items-center justify-center space-x-2"
           >
             <ExternalLink size={18} />
-            <span>Complete FAFSA</span>
+            <span>{t('completeFafsaBtn')}</span>
           </motion.button>
         )}
 
@@ -145,7 +148,7 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
               : 'bg-nhcc-navy text-white hover:bg-nhcc-dark-navy'
           }`}
         >
-          {step.completed ? 'Completed! ✓' : 'Mark as Complete'}
+          {step.completed ? t('completed') : t('markComplete')}
         </motion.button>
       </div>
     </motion.div>

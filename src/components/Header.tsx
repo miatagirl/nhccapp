@@ -1,13 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Star } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 import { StudentProfile } from '../types';
+import { LanguageSelector } from './LanguageSelector';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HeaderProps {
   profile: StudentProfile;
 }
 
 export const Header: React.FC<HeaderProps> = ({ profile }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-gradient-to-r from-nhcc-navy to-nhcc-maroon text-white py-8 px-6 rounded-xl mb-8 shadow-lg">
       <div className="flex items-center justify-between mb-6">
@@ -20,30 +24,34 @@ export const Header: React.FC<HeaderProps> = ({ profile }) => {
         </div>
         
         <div className="flex-1 text-center">
-          <h1 className="text-3xl font-bold">Application Journey</h1>
-          <p className="text-blue-100">Track your progress to New Hope!</p>
+          <h1 className="text-3xl font-bold">{t('applicationJourney')}</h1>
+          <p className="text-blue-100">{t('trackProgress')}</p>
         </div>
         
-        <motion.div 
-          className="flex items-center space-x-4"
-          animate={{ rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-        >
-          <div className="text-center">
-            <div className="flex items-center justify-center bg-white/20 rounded-full p-3 mb-2">
-              <Trophy className="text-yellow-300" size={24} />
+        <div className="flex items-center space-x-4">
+          <LanguageSelector />
+          
+          <motion.div 
+            className="flex items-center space-x-4"
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+          >
+            <div className="text-center">
+              <div className="flex items-center justify-center bg-white/20 rounded-full p-3 mb-2">
+                <Trophy className="text-yellow-300" size={24} />
+              </div>
+              <p className="text-sm font-semibold">{t('totalPoints')}</p>
+              <p className="text-2xl font-bold text-yellow-300">{profile.totalPoints}</p>
             </div>
-            <p className="text-sm font-semibold">Total Points</p>
-            <p className="text-2xl font-bold text-yellow-300">{profile.totalPoints}</p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
 
       <div className="bg-white/10 rounded-lg p-4">
         <div className="flex justify-between items-center mb-2">
-          <span className="font-semibold">Overall Progress</span>
+          <span className="font-semibold">{t('overallProgress')}</span>
           <span className="text-sm">
-            {profile.completedSteps} of {profile.totalSteps} steps completed
+            {profile.completedSteps} {t('of')} {profile.totalSteps} {t('stepsCompleted')}
           </span>
         </div>
         <div className="w-full bg-white/20 rounded-full h-3">

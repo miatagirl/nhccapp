@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Utensils, AlertCircle, Coins } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HousingFormData {
   housingType: string;
@@ -16,6 +17,7 @@ interface HousingFormProps {
 }
 
 export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<HousingFormData>({
     housingType: '',
     mealPlan: '',
@@ -27,19 +29,19 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
   const [showForm, setShowForm] = useState(false);
 
   const housingOptions = [
-    { value: 'dorm-single', label: 'Single Dorm Room', description: 'Private room in residence hall' },
-    { value: 'dorm-double', label: 'Double Dorm Room', description: 'Shared room with one roommate' },
-    { value: 'dorm-suite', label: 'Suite Style', description: 'Private room with shared common area' },
-    { value: 'off-campus', label: 'Off-Campus Housing', description: 'Living independently off campus' }
+    { value: 'dorm-single', label: t('singleDorm'), description: t('singleDormDesc') },
+    { value: 'dorm-double', label: t('doubleDorm'), description: t('doubleDormDesc') },
+    { value: 'dorm-suite', label: t('suiteStyle'), description: t('suiteStyleDesc') },
+    { value: 'off-campus', label: t('offCampus'), description: t('offCampusDesc') }
   ];
 
   const mealPlanOptions = [
-    { value: 'unlimited', label: 'Unlimited Meal Plan', description: 'Unlimited dining hall access + $200 flex dollars' },
-    { value: '19-meals', label: '19 Meals/Week', description: '19 meals per week + $150 flex dollars' },
-    { value: '14-meals', label: '14 Meals/Week', description: '14 meals per week + $100 flex dollars' },
-    { value: '10-meals', label: '10 Meals/Week', description: '10 meals per week + $75 flex dollars' },
-    { value: 'commuter', label: 'Commuter Plan', description: '50 meals per semester + $50 flex dollars' },
-    { value: 'none', label: 'No Meal Plan', description: 'Not participating in meal plan' }
+    { value: 'unlimited', label: t('unlimitedMeal'), description: t('unlimitedMealDesc') },
+    { value: '19-meals', label: t('meals19'), description: t('meals19Desc') },
+    { value: '14-meals', label: t('meals14'), description: t('meals14Desc') },
+    { value: '10-meals', label: t('meals10'), description: t('meals10Desc') },
+    { value: 'commuter', label: t('commuterPlan'), description: t('commuterPlanDesc') },
+    { value: 'none', label: t('noMealPlan'), description: t('noMealPlanDesc') }
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -60,13 +62,13 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Home className="text-green-600" size={20} />
-            <span className="text-green-700 font-semibold">Housing Application Completed</span>
+            <span className="text-green-700 font-semibold">{t('housingCompleted')}</span>
           </div>
           <button
             onClick={() => setShowForm(true)}
             className="text-green-600 hover:text-green-700 text-sm font-medium"
           >
-            Edit Preferences
+            {t('editPreferences')}
           </button>
         </div>
       </div>
@@ -82,7 +84,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-nhcc-maroon text-white hover:bg-nhcc-light-maroon mb-3 flex items-center justify-center space-x-2"
       >
         <Home size={18} />
-        <span>Select Housing Options</span>
+        <span>{t('selectHousingOptions')}</span>
       </motion.button>
     );
   }
@@ -99,7 +101,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         <div>
           <label className="block text-sm font-semibold text-nhcc-navy mb-3 flex items-center">
             <Home className="mr-2" size={18} />
-            Housing Preference
+            {t('housingPreference')}
           </label>
           <div className="space-y-3">
             {housingOptions.map((option) => (
@@ -126,7 +128,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         <div>
           <label className="block text-sm font-semibold text-nhcc-navy mb-3 flex items-center">
             <Utensils className="mr-2" size={18} />
-            Meal Plan Selection
+            {t('mealPlanSelectionTitle')}
           </label>
           <div className="space-y-3">
             {mealPlanOptions.map((option) => (
@@ -154,11 +156,9 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
           <div className="flex items-start space-x-3">
             <Coins className="text-blue-600 mt-1" size={20} />
             <div className="flex-1">
-              <h4 className="font-semibold text-blue-900 mb-2">Laundry Facilities</h4>
+              <h4 className="font-semibold text-blue-900 mb-2">{t('laundryFacilities')}</h4>
               <p className="text-sm text-blue-800 mb-3">
-                All residence halls are equipped with coin-operated laundry facilities. Washers and dryers 
-                are available on each floor. Current rates are $2.00 per wash cycle and $2.00 per dry cycle. 
-                Quarters are required - change machines are available in the lobby of each residence hall.
+                {t('laundryInfo')}
               </p>
               <label className="flex items-start space-x-2 cursor-pointer">
                 <input
@@ -169,7 +169,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
                   required
                 />
                 <span className="text-sm text-blue-900">
-                  I acknowledge the laundry facility information and understand the costs involved.
+                  {t('laundryAcknowledge')}
                 </span>
               </label>
             </div>
@@ -180,12 +180,12 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         <div>
           <label className="block text-sm font-semibold text-nhcc-navy mb-2 flex items-center">
             <AlertCircle className="mr-2" size={18} />
-            Food Allergies & Dietary Restrictions
+            {t('foodAllergies')}
           </label>
           <textarea
             value={formData.foodAllergies}
             onChange={(e) => handleInputChange('foodAllergies', e.target.value)}
-            placeholder="Please list any food allergies, dietary restrictions, or special dietary needs. Our dining services team will work with you to ensure safe meal options."
+            placeholder={t('foodAllergiesPlaceholder')}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nhcc-navy focus:border-nhcc-navy resize-none"
             rows={3}
           />
@@ -194,12 +194,12 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
         {/* Special Circumstances */}
         <div>
           <label className="block text-sm font-semibold text-nhcc-navy mb-2">
-            Special Circumstances or Accommodations
+            {t('specialCircumstances')}
           </label>
           <textarea
             value={formData.specialCircumstances}
             onChange={(e) => handleInputChange('specialCircumstances', e.target.value)}
-            placeholder="Please describe any special circumstances, medical needs, accessibility requirements, or other accommodations you may need. This information helps us provide the best possible living experience."
+            placeholder={t('specialCircumstancesPlaceholder')}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nhcc-navy focus:border-nhcc-navy resize-none"
             rows={3}
           />
@@ -213,7 +213,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
             whileTap={{ scale: 0.98 }}
             className="flex-1 bg-nhcc-navy text-white py-3 px-4 rounded-lg font-semibold hover:bg-nhcc-dark-navy transition-colors duration-200"
           >
-            Submit Housing Preferences
+            {t('submitHousingPrefs')}
           </motion.button>
           <motion.button
             type="button"
@@ -222,7 +222,7 @@ export const HousingForm: React.FC<HousingFormProps> = ({ onSubmit, isCompleted 
             onClick={() => setShowForm(false)}
             className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200"
           >
-            Cancel
+            {t('cancel')}
           </motion.button>
         </div>
       </form>

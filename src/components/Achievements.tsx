@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Star, Target, Zap } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AchievementsProps {
   totalPoints: number;
@@ -8,35 +9,37 @@ interface AchievementsProps {
 }
 
 export const Achievements: React.FC<AchievementsProps> = ({ totalPoints, completedSteps }) => {
+  const { t } = useLanguage();
+
   const achievements = [
     {
       id: 'first-step',
-      title: 'Getting Started',
-      description: 'Complete your first application step',
+      title: t('gettingStarted'),
+      description: t('gettingStartedDesc'),
       icon: <Star className="text-yellow-500" size={20} />,
       unlocked: completedSteps >= 1,
       points: 50
     },
     {
       id: 'halfway',
-      title: 'Halfway Hero',
-      description: 'Complete 50% of your application',
+      title: t('halfwayHero'),
+      description: t('halfwayHeroDesc'),
       icon: <Target className="text-blue-500" size={20} />,
       unlocked: completedSteps >= 2,
       points: 100
     },
     {
       id: 'point-collector',
-      title: 'Point Collector',
-      description: 'Earn 200+ points',
+      title: t('pointCollector'),
+      description: t('pointCollectorDesc'),
       icon: <Zap className="text-purple-500" size={20} />,
       unlocked: totalPoints >= 200,
       points: 75
     },
     {
       id: 'completion-champion',
-      title: 'Completion Champion',
-      description: 'Complete all required steps',
+      title: t('completionChampion'),
+      description: t('completionChampionDesc'),
       icon: <Award className="text-green-500" size={20} />,
       unlocked: completedSteps >= 3,
       points: 200
@@ -47,7 +50,7 @@ export const Achievements: React.FC<AchievementsProps> = ({ totalPoints, complet
     <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
       <h2 className="text-2xl font-bold text-nhcc-navy mb-4 flex items-center">
         <Award className="mr-2 text-nhcc-maroon" />
-        Achievements
+        {t('achievements')}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

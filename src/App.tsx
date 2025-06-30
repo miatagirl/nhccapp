@@ -5,11 +5,13 @@ import { StepCard } from './components/StepCard';
 import { Achievements } from './components/Achievements';
 import { ProgressBar } from './components/ProgressBar';
 import { useApplicationData } from './hooks/useApplicationData';
+import { useLanguage } from './contexts/LanguageContext';
 import { Globe, Users } from 'lucide-react';
 
 function App() {
   const [isInternational, setIsInternational] = useState(false);
   const { steps, profile, toggleStep } = useApplicationData(isInternational);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-red-50">
@@ -18,7 +20,7 @@ function App() {
         
         {/* Student Type Toggle */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <h2 className="text-xl font-bold text-nhcc-navy mb-4">Student Type</h2>
+          <h2 className="text-xl font-bold text-nhcc-navy mb-4">{t('studentType')}</h2>
           <div className="flex space-x-4">
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -31,7 +33,7 @@ function App() {
               }`}
             >
               <Users size={20} />
-              <span>Domestic Student</span>
+              <span>{t('domesticStudent')}</span>
             </motion.button>
             
             <motion.button
@@ -45,7 +47,7 @@ function App() {
               }`}
             >
               <Globe size={20} />
-              <span>International Student</span>
+              <span>{t('internationalStudent')}</span>
             </motion.button>
           </div>
         </div>
@@ -55,11 +57,11 @@ function App() {
         {/* Application Steps */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-nhcc-navy">Application Steps</h2>
+            <h2 className="text-2xl font-bold text-nhcc-navy">{t('applicationSteps')}</h2>
             <div className="text-right">
-              <p className="text-sm text-gray-600">Progress</p>
+              <p className="text-sm text-gray-600">{t('progress')}</p>
               <p className="text-lg font-semibold text-nhcc-maroon">
-                {profile.completedSteps} / {profile.totalSteps} Required Steps
+                {profile.completedSteps} / {profile.totalSteps} {t('requiredSteps')}
               </p>
             </div>
           </div>
@@ -96,12 +98,12 @@ function App() {
             >
               🎉
             </motion.div>
-            <h2 className="text-3xl font-bold mb-2">Congratulations!</h2>
+            <h2 className="text-3xl font-bold mb-2">{t('congratulations')}</h2>
             <p className="text-xl mb-4">
-              You've completed all required application steps for New Hope Christian College!
+              {t('completedAllSteps')}
             </p>
             <p className="text-lg">
-              Welcome to the Deacon family! We're excited to have you join our community.
+              {t('welcomeDeacon')}
             </p>
           </motion.div>
         )}
@@ -109,13 +111,13 @@ function App() {
         {/* Footer */}
         <div className="text-center mt-12 text-gray-600">
           <p className="mb-2">
-            Questions? Contact our Admissions Office at{' '}
+            {t('questionsContact')}{' '}
             <a href="mailto:admissions@newhope.edu" className="text-nhcc-navy hover:underline">
               admissions@newhope.edu
             </a>
           </p>
           <p>
-            Visit us at{' '}
+            {t('visitUs')}{' '}
             <a 
               href="https://www.newhope.edu" 
               target="_blank" 
