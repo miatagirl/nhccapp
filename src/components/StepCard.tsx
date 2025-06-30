@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Circle, Star, Globe, ExternalLink } from 'lucide-react';
 import { ApplicationStep } from '../types';
+import { HousingForm } from './HousingForm';
 
 interface StepCardProps {
   step: ApplicationStep;
@@ -27,6 +28,12 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
 
   const handleFafsaLink = () => {
     window.open('https://studentaid.gov/h/apply-for-aid/fafsa', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleHousingSubmit = (housingData: any) => {
+    // Store housing data (in a real app, this would go to a backend)
+    console.log('Housing preferences submitted:', housingData);
+    onToggle(step.id);
   };
 
   return (
@@ -103,6 +110,14 @@ export const StepCard: React.FC<StepCardProps> = ({ step, onToggle, index }) => 
             <ExternalLink size={18} />
             <span>Complete FAFSA</span>
           </motion.button>
+        )}
+
+        {/* Housing Form - Only show for housing step */}
+        {step.id === 'housing' && (
+          <HousingForm 
+            onSubmit={handleHousingSubmit}
+            isCompleted={step.completed}
+          />
         )}
 
         <motion.button
