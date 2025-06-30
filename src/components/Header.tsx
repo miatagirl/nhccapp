@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderProps> = ({ profile }) => {
 
   return (
     <div className="bg-gradient-to-r from-nhcc-navy to-nhcc-maroon text-white py-8 px-6 rounded-xl mb-8 shadow-lg">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-4">
           <img 
             src="/NHCC Logo White.png" 
@@ -28,23 +28,24 @@ export const Header: React.FC<HeaderProps> = ({ profile }) => {
           <p className="text-blue-100">{t('trackProgress')}</p>
         </div>
         
-        <div className="flex items-center space-x-4">
-          <LanguageSelector />
-          
-          <motion.div 
-            className="flex items-center space-x-4"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-          >
-            <div className="text-center">
-              <div className="flex items-center justify-center bg-white/20 rounded-full p-3 mb-2">
-                <Trophy className="text-yellow-300" size={24} />
-              </div>
-              <p className="text-sm font-semibold">{t('totalPoints')}</p>
-              <p className="text-2xl font-bold text-yellow-300">{profile.totalPoints}</p>
+        <motion.div 
+          className="flex items-center space-x-4"
+          animate={{ rotate: [0, 5, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+        >
+          <div className="text-center">
+            <div className="flex items-center justify-center bg-white/20 rounded-full p-3 mb-2">
+              <Trophy className="text-yellow-300" size={24} />
             </div>
-          </motion.div>
-        </div>
+            <p className="text-sm font-semibold">{t('totalPoints')}</p>
+            <p className="text-2xl font-bold text-yellow-300">{profile.totalPoints}</p>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Language Selector - Moved to its own line */}
+      <div className="flex justify-center mb-4">
+        <LanguageSelector />
       </div>
 
       <div className="bg-white/10 rounded-lg p-4">
